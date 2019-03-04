@@ -13,10 +13,13 @@ Suppermarket stock class implemented methods to populate Products and Deals clas
 In addition Supermarket provides with functionality to retrieve specific item- product name , price, multibuy quantity 
 required to qualify for discounted price.
 
-Third stage of development included interface class linking with inheritance to supermarket stock class. 
-Test classes where updated with new test methods to use Scan and Getprice methods to verify data correctness. 
-This stage of development also included re-evaluating code and if necessary amend it for better programming practice.
+Third stage of development included interface class linking with inheritance to supermarket stock class. Test classes where updated with new test methods to use Scan and Getprice methods to verify data correctness. This stage of development also included re-evaluating code and if necessary amend it for better programming practice. As a part of evaluation i do can identify areas that could benefit from improvement. During implementation of interface i have identified that test classes can be potentially modified to test interface scenario. Mocking interface code sample ( as per below ) which with more time i believe could be included inside this project. 
+
+            var iCheckout = new Mock<ICheckout>();
+            iCheckout.Object.Scan("A");
+            Assert.Equal(50, iCheckout.Object.GetTotalPrice());
+
 
 Please feel free to contact me if you have any questions.
 Thank you,
-Mindaugas Jarmaliunas
+Mindaugas 
