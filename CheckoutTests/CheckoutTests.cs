@@ -11,14 +11,13 @@ namespace CheckoutTests
         {
             //Arrange
             var superMarketsuperMarket = new SuperMarketsuperMarket();
-            superMarketsuperMarket.AddsuperMarket();
-            superMarketsuperMarket.AddDeals();
+            superMarketsuperMarket.GenerateSuperMarketItems();
             //Act
-            superMarketsuperMarket.AddScannedItem("A");
-            superMarketsuperMarket.AddScannedItem("A");
-            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.Scan("A");
+            superMarketsuperMarket.Scan("A");
+            superMarketsuperMarket.Scan("A");
             //Assert
-            Assert.Equal(130, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+            Assert.Equal(130, superMarketsuperMarket.GetTotalPrice());
         }
 
         [Fact]
@@ -26,13 +25,12 @@ namespace CheckoutTests
         {
             //Arrange
             var superMarketsuperMarket = new SuperMarketsuperMarket();
-            superMarketsuperMarket.AddsuperMarket();
-            superMarketsuperMarket.AddDeals();
+            superMarketsuperMarket.GenerateSuperMarketItems();
             //Act
-            superMarketsuperMarket.AddScannedItem("B");
-            superMarketsuperMarket.AddScannedItem("B");
+            superMarketsuperMarket.Scan("B");
+            superMarketsuperMarket.Scan("B");
             //Assert
-            Assert.Equal(45, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+            Assert.Equal(45, superMarketsuperMarket.GetTotalPrice());
         }
 
         [Fact]
@@ -40,15 +38,14 @@ namespace CheckoutTests
         {
             //Arrange
             var superMarketsuperMarket = new SuperMarketsuperMarket();
-            superMarketsuperMarket.AddsuperMarket();
-            superMarketsuperMarket.AddDeals();
+            superMarketsuperMarket.GenerateSuperMarketItems();
             //Act
-            superMarketsuperMarket.AddScannedItem("C");
-            superMarketsuperMarket.AddScannedItem("C");
-            superMarketsuperMarket.AddScannedItem("C");
-            superMarketsuperMarket.AddScannedItem("C");
+            superMarketsuperMarket.Scan("C");
+            superMarketsuperMarket.Scan("C");
+            superMarketsuperMarket.Scan("C");
+            superMarketsuperMarket.Scan("C");
             //Assert
-            Assert.Equal(80, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+            Assert.Equal(80, superMarketsuperMarket.GetTotalPrice());
         }
 
         [Fact]
@@ -56,15 +53,14 @@ namespace CheckoutTests
         {
             //Arrange
             var superMarketsuperMarket = new SuperMarketsuperMarket();
-            superMarketsuperMarket.AddsuperMarket();
-            superMarketsuperMarket.AddDeals();
+            superMarketsuperMarket.GenerateSuperMarketItems();
             //Act
-            superMarketsuperMarket.AddScannedItem("D");
-            superMarketsuperMarket.AddScannedItem("D");
-            superMarketsuperMarket.AddScannedItem("D");
-            superMarketsuperMarket.AddScannedItem("D");
+            superMarketsuperMarket.Scan("D");
+            superMarketsuperMarket.Scan("D");
+            superMarketsuperMarket.Scan("D");
+            superMarketsuperMarket.Scan("D");
             //Assert
-            Assert.Equal(60, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+            Assert.Equal(60, superMarketsuperMarket.GetTotalPrice());
         }
 
         [Fact]
@@ -72,18 +68,17 @@ namespace CheckoutTests
         {
             //Arrange
             var superMarketsuperMarket = new SuperMarketsuperMarket();
-            superMarketsuperMarket.AddsuperMarket();
-            superMarketsuperMarket.AddDeals();
+            superMarketsuperMarket.GenerateSuperMarketItems();
             //Act
-            superMarketsuperMarket.AddScannedItem("A");
-            superMarketsuperMarket.AddScannedItem("A");
-            superMarketsuperMarket.AddScannedItem("A");
-            superMarketsuperMarket.AddScannedItem("B");
-            superMarketsuperMarket.AddScannedItem("B");
-            superMarketsuperMarket.AddScannedItem("C");
-            superMarketsuperMarket.AddScannedItem("D");
+            superMarketsuperMarket.Scan("A");
+            superMarketsuperMarket.Scan("A");
+            superMarketsuperMarket.Scan("A");
+            superMarketsuperMarket.Scan("B");
+            superMarketsuperMarket.Scan("B");
+            superMarketsuperMarket.Scan("C");
+            superMarketsuperMarket.Scan("D");
             //Assert
-            Assert.Equal(210, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+            Assert.Equal(210, superMarketsuperMarket.GetTotalPrice());
         }
     }
 }

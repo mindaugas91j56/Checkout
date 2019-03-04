@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Mindaugas.Jarmaliunas.Checkout
 {
-    public class SuperMarketsuperMarket
+    public class SuperMarketsuperMarket : ICheckout
     {
         private List<Products> product = new List<Products>();
         private List<Deals> deals = new List<Deals>();
@@ -52,9 +52,9 @@ namespace Mindaugas.Jarmaliunas.Checkout
             return deals[id].multiBuyQuantity;
         }
 
-        public void AddScannedItem(string itemCode)
+        public void Scan(string item)
         {
-            barcodes.Add(itemCode);
+            barcodes.Add(item);
         }
 
         public List<string> GetItemCodeList()
@@ -62,12 +62,18 @@ namespace Mindaugas.Jarmaliunas.Checkout
             return barcodes;
         }
 
-        public int calculateTotalPrice(List<string> ItemList)
+        public void GenerateSuperMarketItems()
         {
+            AddSuperMarketItem();
+            AddDeals();
+        }
+
+        public int GetTotalPrice()
+        {
+            var ItemList = GetItemCodeList();
             var totalPrice = 0;
             int multiBuy = 0;
             int total = 0;
-
 
             for (int i = 0; i < ItemList.Count; i++)
             {
@@ -76,7 +82,6 @@ namespace Mindaugas.Jarmaliunas.Checkout
                     total += GetPrice(ItemList[i]);
                 }
             }
-
 
             var itemCodeBelongsToMultiBuy = ItemList.Contains(FirstMultiBuyOptionCode());
             int numberOfItemsA = ItemList.Where(x => x.Contains(FirstMultiBuyOptionCode())).Count();
@@ -116,9 +121,7 @@ namespace Mindaugas.Jarmaliunas.Checkout
             return totalPrice + total;
         }
 
-
-
-        public SuperMarketsuperMarket AddsuperMarket()
+        public SuperMarketsuperMarket AddSuperMarketItem()
         {
             product.Add(new Products
             {
@@ -166,7 +169,5 @@ namespace Mindaugas.Jarmaliunas.Checkout
 
             return this;
         }
-
-
     }
 }

@@ -8,8 +8,7 @@ namespace Mindaugas.Jarmaliunas.Checkout
         {
             ConsoleKeyInfo inputKey;
             var superMarket = new SuperMarketsuperMarket();
-            superMarket.AddsuperMarket();
-            superMarket.AddDeals();
+            superMarket.GenerateSuperMarketItems();
 
             Console.WriteLine("Welcome to Mindaugas Checkout");
             Console.WriteLine("To Scan item code by entering barcode. In order to exit press ESC");
@@ -22,10 +21,10 @@ namespace Mindaugas.Jarmaliunas.Checkout
 
                 if (superMarket.DoesProductExist(inputKey.Key.ToString()))
                 {
-                    superMarket.AddScannedItem(inputKey.Key.ToString());
+                    superMarket.Scan(inputKey.Key.ToString());
                     Console.WriteLine("Thank you for using Mindaugas Checkout");
                     superMarket.GetItemCodeList().ForEach(a => Console.WriteLine("Reciept: " + a));
-                    Console.WriteLine("Total price :" + superMarket.calculateTotalPrice(superMarket.GetItemCodeList()));
+                    Console.WriteLine("Total price :" + superMarket.GetTotalPrice());
                 }
                 else
                 {
