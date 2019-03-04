@@ -5,105 +5,85 @@ namespace CheckoutTests
 {
     public class CheckoutTests
     {
-        [Fact]
-        public void CheckoutTest_ItemA()
-        {
-            var superMarketStock = new SuperMarketStock();
-
-            string itemCode = "A";
-
-            Assert.Equal(50, superMarketStock.GetPrice_Old(itemCode));
-        }
-
-        [Fact]
-        public void CheckoutTest_ItemB()
-        {
-            var superMarketStock = new SuperMarketStock();
-
-            string itemCode = "B";
-
-            Assert.Equal(30, superMarketStock.GetPrice_Old(itemCode));
-        }
-
-        [Fact]
-        public void CheckoutTest_ItemC()
-        {
-            var superMarketStock = new SuperMarketStock();
-
-            string itemCode = "C";
-
-            Assert.Equal(20, superMarketStock.GetPrice_Old(itemCode));
-        }
-
-        [Fact]
-        public void CheckoutTest_ItemD()
-        {
-            var superMarketStock = new SuperMarketStock();
-
-            string itemCode = "D";
-
-            Assert.Equal(15, superMarketStock.GetPrice_Old(itemCode));
-        }
-
+    
         [Fact]
         public void CheckoutTest_ScanProduct_MultipleA()
         {
             //Arrange
-            var superMarketStock = new SuperMarketStock();
-            superMarketStock.AddStock();
-            superMarketStock.AddDeals();
+            var superMarketsuperMarket = new SuperMarketsuperMarket();
+            superMarketsuperMarket.AddsuperMarket();
+            superMarketsuperMarket.AddDeals();
             //Act
-            superMarketStock.AddScannedItem("A");
-            superMarketStock.AddScannedItem("A");
-            superMarketStock.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("A");
             //Assert
-            Assert.Equal(130, superMarketStock.calculateTotalPrice(superMarketStock.GetItemCodeList()));
+            Assert.Equal(130, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
         }
 
         [Fact]
         public void CheckoutTest_ScanProduct_MultipleB()
         {
             //Arrange
-            var superMarketStock = new SuperMarketStock();
-            superMarketStock.AddStock();
-            superMarketStock.AddDeals();
+            var superMarketsuperMarket = new SuperMarketsuperMarket();
+            superMarketsuperMarket.AddsuperMarket();
+            superMarketsuperMarket.AddDeals();
             //Act
-            superMarketStock.AddScannedItem("B");
-            superMarketStock.AddScannedItem("B");
+            superMarketsuperMarket.AddScannedItem("B");
+            superMarketsuperMarket.AddScannedItem("B");
             //Assert
-            Assert.Equal(45, superMarketStock.calculateTotalPrice(superMarketStock.GetItemCodeList()));
+            Assert.Equal(45, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
         }
 
         [Fact]
         public void CheckoutTest_ScanProduct_MultipleC()
         {
             //Arrange
-            var superMarketStock = new SuperMarketStock();
-            superMarketStock.AddStock();
-            superMarketStock.AddDeals();
+            var superMarketsuperMarket = new SuperMarketsuperMarket();
+            superMarketsuperMarket.AddsuperMarket();
+            superMarketsuperMarket.AddDeals();
             //Act
-            superMarketStock.AddScannedItem("C");
-            superMarketStock.AddScannedItem("C");
-            superMarketStock.AddScannedItem("C");
-            superMarketStock.AddScannedItem("C");
+            superMarketsuperMarket.AddScannedItem("C");
+            superMarketsuperMarket.AddScannedItem("C");
+            superMarketsuperMarket.AddScannedItem("C");
+            superMarketsuperMarket.AddScannedItem("C");
             //Assert
-            Assert.Equal(80, superMarketStock.calculateTotalPrice(superMarketStock.GetItemCodeList()));
+            Assert.Equal(80, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
         }
 
         [Fact]
         public void CheckoutTest_ScanProduct_MultipleD()
         {
             //Arrange
-            var superMarketStock = new SuperMarketStock();
-            superMarketStock.AddStock();
-            superMarketStock.AddDeals();
+            var superMarketsuperMarket = new SuperMarketsuperMarket();
+            superMarketsuperMarket.AddsuperMarket();
+            superMarketsuperMarket.AddDeals();
             //Act
-            superMarketStock.AddScannedItem("D");
-            superMarketStock.AddScannedItem("D");
-            superMarketStock.AddScannedItem("D");
-            superMarketStock.AddScannedItem("D");
+            superMarketsuperMarket.AddScannedItem("D");
+            superMarketsuperMarket.AddScannedItem("D");
+            superMarketsuperMarket.AddScannedItem("D");
+            superMarketsuperMarket.AddScannedItem("D");
             //Assert
-            Assert.Equal(60, superMarketStock.calculateTotalPrice(superMarketStock.GetItemCodeList()));
+            Assert.Equal(60, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
+        }
+
+        [Fact]
+        public void CheckoutTest_ScanProduct_FullProductListWithMultiples()
+        {
+            //Arrange
+            var superMarketsuperMarket = new SuperMarketsuperMarket();
+            superMarketsuperMarket.AddsuperMarket();
+            superMarketsuperMarket.AddDeals();
+            //Act
+            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("A");
+            superMarketsuperMarket.AddScannedItem("B");
+            superMarketsuperMarket.AddScannedItem("B");
+            superMarketsuperMarket.AddScannedItem("C");
+            superMarketsuperMarket.AddScannedItem("D");
+            //Assert
+            Assert.Equal(210, superMarketsuperMarket.calculateTotalPrice(superMarketsuperMarket.GetItemCodeList()));
         }
     }
 }

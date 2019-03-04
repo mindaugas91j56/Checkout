@@ -3,35 +3,13 @@ using System.Linq;
 
 namespace Mindaugas.Jarmaliunas.Checkout
 {
-    public class SuperMarketStock
+    public class SuperMarketsuperMarket
     {
         private List<Products> product = new List<Products>();
         private List<Deals> deals = new List<Deals>();
         private List<string> barcodes = new List<string>();
 
-        public int GetPrice_Old(string barcode)
-        {
-            if (barcode == "A")
-            {
-                return 50;
-            }
-            else if (barcode == "B")
-            {
-                return 30;
-            }
-            else if (barcode == "C")
-            {
-                return 20;
-            }
-            else if (barcode == "D")
-            {
-                return 15;
-            }
-            return 0;
-        }
-    
-
-    public int GetPrice(string barcode)
+        public int GetPrice(string barcode)
         {
             var item = this.product.Find(x => x.productName == barcode).price;
             return item;
@@ -59,6 +37,21 @@ namespace Mindaugas.Jarmaliunas.Checkout
             return (this.deals.Where(x => x.productName == barcode).FirstOrDefault()) != null ? true : false;
         }
 
+        public string FirstMultiBuyOptionCode()
+        {
+            return deals[0].productName;
+        }
+
+        public string SecondMultiBuyOptionCode()
+        {
+            return deals[1].productName;
+        }
+
+        public int GetItemMultiBytQuantityById(int id)
+        {
+            return deals[id].multiBuyQuantity;
+        }
+
         public void AddScannedItem(string itemCode)
         {
             barcodes.Add(itemCode);
@@ -67,7 +60,6 @@ namespace Mindaugas.Jarmaliunas.Checkout
         public List<string> GetItemCodeList()
         {
             return barcodes;
-
         }
 
         public int calculateTotalPrice(List<string> ItemList)
@@ -76,54 +68,57 @@ namespace Mindaugas.Jarmaliunas.Checkout
             int multiBuy = 0;
             int total = 0;
 
+
             for (int i = 0; i < ItemList.Count; i++)
             {
-                if (ItemList[i] != "A" && ItemList[i] != "B")
+                if (!DoesProductHaveMultiBuyOption(ItemList[i]))
                 {
                     total += GetPrice(ItemList[i]);
                 }
             }
 
-            var itemCodeBelongsToMultiBuy = ItemList.Contains("A");
-            int numberOfItemsA = ItemList.Where(x => x.Contains("A")).Count();
 
-            if (numberOfItemsA >= 3)
+            var itemCodeBelongsToMultiBuy = ItemList.Contains(FirstMultiBuyOptionCode());
+            int numberOfItemsA = ItemList.Where(x => x.Contains(FirstMultiBuyOptionCode())).Count();
+
+            if (numberOfItemsA >= GetItemMultiBytQuantityById(0))
             {
-                int pairsOfMultiples = numberOfItemsA % 3;
-                multiBuy = GetMultiBuyPrice("A") * (numberOfItemsA / 3);
+                int pairsOfMultiples = numberOfItemsA % GetItemMultiBytQuantityById(0);
+                multiBuy = GetMultiBuyPrice(FirstMultiBuyOptionCode()) * (numberOfItemsA / GetItemMultiBytQuantityById(0));
 
-                multiBuy += GetPrice("A") * pairsOfMultiples;
+                multiBuy += GetPrice(FirstMultiBuyOptionCode()) * pairsOfMultiples;
                 totalPrice += multiBuy;
 
             }
-            else if (ItemList.Contains("A"))
+            else if (ItemList.Contains(FirstMultiBuyOptionCode()))
             {
-                totalPrice += numberOfItemsA * GetPrice("A");
+                totalPrice += numberOfItemsA * GetPrice(FirstMultiBuyOptionCode());
             }
 
-            var itemCodeBelongsToMultiBuyTwo = ItemList.Contains("B");
-            int numberOfItemsB = ItemList.Where(x => x.Contains("B")).Count();
+            var itemCodeBelongsToMultiBuyTwo = ItemList.Contains(SecondMultiBuyOptionCode());
+            int numberOfItemsB = ItemList.Where(x => x.Contains(SecondMultiBuyOptionCode())).Count();
 
 
-            if (numberOfItemsB >= 2)
+            if (numberOfItemsB >= GetItemMultiBytQuantityById(1))
             {
-                int pairsOfMultiples = numberOfItemsB % 2;
-                multiBuy = GetMultiBuyPrice("B") * (numberOfItemsB / 2);
+                int pairsOfMultiples = numberOfItemsB % GetItemMultiBytQuantityById(1);
+                multiBuy = GetMultiBuyPrice(SecondMultiBuyOptionCode()) * (numberOfItemsB / GetItemMultiBytQuantityById(1));
 
-                multiBuy += GetPrice("B") * pairsOfMultiples;
+                multiBuy += GetPrice(SecondMultiBuyOptionCode()) * pairsOfMultiples;
                 totalPrice += multiBuy;
 
             }
-            else if (ItemList.Contains("B"))
+            else if (ItemList.Contains(SecondMultiBuyOptionCode()))
             {
-                totalPrice += numberOfItemsB * GetPrice("B");
+                totalPrice += numberOfItemsB * GetPrice(SecondMultiBuyOptionCode());
             }
 
             return totalPrice + total;
         }
 
 
-        public SuperMarketStock AddStock()
+
+        public SuperMarketsuperMarket AddsuperMarket()
         {
             product.Add(new Products
             {
@@ -152,7 +147,7 @@ namespace Mindaugas.Jarmaliunas.Checkout
             return this;
         }
 
-        public SuperMarketStock AddDeals()
+        public SuperMarketsuperMarket AddDeals()
         {
             deals.Add(new Deals
             {

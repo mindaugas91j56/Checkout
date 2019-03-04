@@ -6,16 +6,13 @@ namespace Mindaugas.Jarmaliunas.Checkout
     {
         static void Main(string[] args)
         {
-            var stock = new SuperMarketStock();
-            stock.AddStock();
-            stock.AddDeals();
-
+            ConsoleKeyInfo inputKey;
+            var superMarket = new SuperMarketsuperMarket();
+            superMarket.AddsuperMarket();
+            superMarket.AddDeals();
 
             Console.WriteLine("Welcome to Mindaugas Checkout");
             Console.WriteLine("To Scan item code by entering barcode. In order to exit press ESC");
-
-
-            ConsoleKeyInfo inputKey;
 
             while (true)
             {
@@ -23,21 +20,18 @@ namespace Mindaugas.Jarmaliunas.Checkout
                 if (inputKey.Key == ConsoleKey.Escape)
                     break;
 
-
-                if (stock.DoesProductExist(inputKey.Key.ToString()))
+                if (superMarket.DoesProductExist(inputKey.Key.ToString()))
                 {
-
-                    stock.AddScannedItem(inputKey.Key.ToString());
-                    var allBarCodesList = stock.GetItemCodeList();
-
-                    var total = stock.calculateTotalPrice(allBarCodesList);
-
-                    Console.WriteLine("Total price " + total);
+                    superMarket.AddScannedItem(inputKey.Key.ToString());
+                    Console.WriteLine("Thank you for using Mindaugas Checkout");
+                    superMarket.GetItemCodeList().ForEach(a => Console.WriteLine("Reciept: " + a));
+                    Console.WriteLine("Total price :" + superMarket.calculateTotalPrice(superMarket.GetItemCodeList()));
                 }
                 else
                 {
                     Console.WriteLine("Item code has been not recornised please re-enter");
                 }
+                Console.WriteLine("----------------------------------------------------------");
             }
         }
     }

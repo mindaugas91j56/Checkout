@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Mindaugas.Jarmaliunas.Checkout
+﻿namespace Mindaugas.Jarmaliunas.Checkout
 {
     public class Deals
     {
